@@ -11,7 +11,7 @@ const blogs = (props: blogsTypes) => {
     
     const navigate = useNavigate();
     useEffect(()=>{
-        navigate(props.isAuth === true ? "/" : "/login") 
+        navigate(props.isAuth === true ? "/" : "/SignUp") 
     }, [])
     return ( 
         <div className="blogs">

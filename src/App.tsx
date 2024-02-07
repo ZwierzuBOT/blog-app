@@ -1,5 +1,6 @@
 
-import './App.css'
+import './styles/App.css'
+import "./styles/Auth.css"
 
 import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom'
 
@@ -8,7 +9,10 @@ import Blogs from "./blogs";
 import Login from './components/AuthPages/Login';
 import SignUp from './components/AuthPages/SignUp';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
+
+
 
 function App() {
  
@@ -19,8 +23,8 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path='/login' element={<Login/>} />
-          <Route path='/signup' element={<SignUp/>} />
+          <Route path='/Login' element={<Login/>} />
+          <Route path='/SignUp' element={<SignUp/>} />
           <Route path='/' element={<Blogs isAuth={isLogged} />} />
         </Routes>
       </div>
