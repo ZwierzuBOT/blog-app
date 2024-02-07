@@ -11,12 +11,14 @@ const Login = () => {
         <div className="form">
         <h1>Login</h1>
         <div className="inputs">
-            <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
-            <input type="text" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+        <label htmlFor="email">Email:</label>
+            <input type="text" placeholder="..." onChange={(e) => setEmail(e.target.value)}/>
+            <label htmlFor="pass">Password:</label>
+            <input type="password" placeholder="..." onChange={(e) => setPassword(e.target.value)}/>
         </div>
         <div className="buttons">
-            <button className="submit">Login</button>
             <button className="change" onClick={()=>navigate("/SignUp")}>Sign Up</button>
+            <button className="submit">Login</button>
         </div>
     </div>
      );

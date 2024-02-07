@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Protest+Riot&display=swap');
+
+
+
 *{
     padding: 0;
     margin: 0;
@@ -5,6 +9,7 @@
     border: none;
     outline: none;
     text-decoration: none;
+    font-family: "Protest Riot", "Poppins", sans-serif;
 }
 
 html{

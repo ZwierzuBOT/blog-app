@@ -15,7 +15,7 @@ const SignUp = () => {
                 <label htmlFor="email">Email:</label>
                 <input type="text" placeholder="..." onChange={(e) => setEmail(e.target.value)} name="email"/>
                 <label htmlFor="pass">Password:</label>
-                <input type="text" placeholder="..." onChange={(e) => setPassword(e.target.value)} name="pass"/>
+                <input type="password" placeholder="..." onChange={(e) => setPassword(e.target.value)} name="pass"/>
             </div>
             <div className="buttons">
                 <button className="submit">Sign Up</button>
