@@ -2,6 +2,7 @@
 
 
 
+
 *{
     padding: 0;
     margin: 0;
@@ -9,7 +10,7 @@
     border: none;
     outline: none;
     text-decoration: none;
-    font-family: "Protest Riot", "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 html{

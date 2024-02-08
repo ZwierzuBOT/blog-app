@@ -22,7 +22,7 @@
 
 .inputs{
     width: 100%;
-    height: 60%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -38,7 +38,7 @@
 
 .inputs label{
     width: 100%;
-    height: 20%;
+    height: 15%;
     font-size: 2rem;
     display: flex;
     justify-content: flex-start;
@@ -51,7 +51,7 @@
 
 .buttons{
     width: 100%;
-    height: 30%;
+    height: 20%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -69,17 +69,10 @@
   box-sizing: border-box;
   color: #111827;
   font-size: 2rem;
-  font-weight: 600;
-  line-height: 1.25rem;
-  padding: .75rem 1rem;
-  text-align: center;
-  text-decoration: none #D1D5DB solid;
-  text-decoration-thickness: auto;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+  transition: all 0.2s ease;
+
 }
 
 .change:hover {
@@ -115,17 +108,10 @@
   margin: 0;
   outline: none;
   overflow: hidden;
-  padding: 0 32px;
-  text-align: center;
   text-decoration: none;
   transform: translate3d(0, 0, 0);
-  transition: all 150ms;
-  vertical-align: baseline;
-  white-space: nowrap;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
   width: 20%;
+  transition: all .2s ease-in-out;
 }
 
 .submit:hover {
@@ -141,3 +127,35 @@
   box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
 }
 
+
+
+.google{
+  width: 70%;
+  height: 20%;
+  margin: auto;
+  border: 1rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+
+}
+
+.blue{
+  background-color: rgb(66, 121, 239);
+  color: white;
+}
+
+
+.w{
+  width: 15%;
+  height: 80%;
+  background-color: #efefef;
+  color: gray;
+  padding: .1rem;
+  font-size: .1rem;
+  border-radius: 1rem;
+}

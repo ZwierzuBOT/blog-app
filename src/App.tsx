@@ -5,7 +5,7 @@ import "./styles/Auth.css"
 import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom'
 
 
-import Blogs from "./blogs";
+import Blogs from "./components/main/blogs";
 import Login from './components/AuthPages/Login';
 import SignUp from './components/AuthPages/SignUp';
 
@@ -23,9 +23,9 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path='/Login' element={<Login/>} />
-          <Route path='/SignUp' element={<SignUp/>} />
-          <Route path='/' element={<Blogs isAuth={isLogged} />} />
+          <Route path='/Login' element={<Login isAuth={isLogged} setIsAuth={setIsLogged}/>} />
+          <Route path='/SignUp' element={<SignUp isAuth={isLogged}  setIsAuth={setIsLogged}/>} />
+          <Route path='/' element={<Blogs isAuth={isLogged} setIsAuth={setIsLogged} />} />
         </Routes>
       </div>
     </Router>
