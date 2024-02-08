@@ -29,9 +29,12 @@ const Login = (props:blogsTypes) => {
 
 
     const handleLogin = async () =>{
-        console.log(auth);
         try{
-        await signInWithEmailAndPassword(auth, email, password)
+        await signInWithEmailAndPassword(auth, email, password).then(()=>{
+            props.setIsAuth(true);
+            localStorage.setItem("isAuth", "true");
+            navigate("/");
+        })
         }catch(err){
             console.error(err);
         }
