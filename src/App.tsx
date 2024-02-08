@@ -11,7 +11,7 @@ import SignUp from './components/AuthPages/SignUp';
 
 import { useState } from 'react';
 
-
+import Header from './components/main/header';
 
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <Header/>
         <Routes>
           <Route path='/Login' element={<Login isAuth={isLogged} setIsAuth={setIsLogged}/>} />
           <Route path='/SignUp' element={<SignUp isAuth={isLogged}  setIsAuth={setIsLogged}/>} />
