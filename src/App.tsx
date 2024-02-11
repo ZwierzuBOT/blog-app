@@ -14,14 +14,14 @@ import General from "./components/Settings/General";
 
 
 import { useState } from 'react';
-
 import Header from './components/main/header';
 
 
 function App() {
- 
+
   const [isLogged, setIsLogged] = useState(false);
   
+  const [player, setPlayer] = useState();
 
   return (
 
@@ -29,10 +29,10 @@ function App() {
       <div className="App">
         <Header/>
         <Routes>
-          <Route path='/Login' element={<Login isAuth={isLogged} setIsAuth={setIsLogged}/>} />
+          <Route path='/Login' element={<Login isAuth={isLogged} setIsAuth={setIsLogged} user={player} setUser={setPlayer}/>} />
           <Route path='/SignUp' element={<SignUp isAuth={isLogged}  setIsAuth={setIsLogged}/>} />
           <Route path='/' element={<Blogs isAuth={isLogged} setIsAuth={setIsLogged} />} />
-          <Route path='/Settings/general' element={<General/>}/>
+          <Route path='/Settings/general' element={<General isAuth={isLogged} setIsAuth={setIsLogged} />}/>
         </Routes>
       </div>
     </Router>

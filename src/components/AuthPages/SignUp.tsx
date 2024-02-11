@@ -4,15 +4,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 
-import { auth, googleProvider } from "../../config/firebase.js";
+import { auth, googleProvider } from "../../config/firebase.ts";
 
 import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+
 
 type blogsTypes = {
     isAuth:boolean
     setIsAuth:React.Dispatch<React.SetStateAction<boolean>>
+    user:object
+    setUser:React.Dispatch<React.SetStateAction<object>>
 }
-
 const SignUp = (props:blogsTypes) => {
 
     const [email, setEmail] = useState("");
@@ -22,9 +24,8 @@ const SignUp = (props:blogsTypes) => {
     
     const handleGoogle = async () =>{
         try{
-        await signInWithPopup(auth, googleProvider);
+        await signInWithPopup(auth, googleProvider)
         props.setIsAuth(true);
-        localStorage.setItem("isAuth", "true");
         navigate("/");
         console.log(props.isAuth);
         }catch(err){
@@ -35,7 +36,9 @@ const SignUp = (props:blogsTypes) => {
 
     const handleSign = async () =>{
         try{
-            await createUserWithEmailAndPassword(auth, email, password);
+            await createUserWithEmailAndPassword(auth, email, password).then((userCredential) =>{
+                 const user = userCredential.user;
+            });
             navigate("/Login")
         }catch(err){
             console.error(err);

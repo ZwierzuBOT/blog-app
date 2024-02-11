@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 type blogsTypes = {
     isAuth: boolean;
@@ -10,21 +10,17 @@ const Blogs = (props: blogsTypes) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const storedIsAuth = localStorage.getItem("isAuth");
-
-        if (storedIsAuth === "true") {
-            props.setIsAuth(true);
-            navigate("/");
-        } else {
+        if (props.isAuth !== true) {
             props.setIsAuth(false);
             navigate("/SignUp");
+        } else {
+            props.setIsAuth(true);
         }
-    }, []);
+    });
 
 
 
-    const [blogs, setBlogs] = useState([]);
-
+    
 
 
     return ( 
