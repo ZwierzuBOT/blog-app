@@ -15,6 +15,8 @@ import "../../styles/Login.css"
 type blogsTypes = {
     isAuth: boolean;
     setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+    User: { name: string };  
+    SetUser: React.Dispatch<React.SetStateAction<{ name: string }>>;
 };
 
 
@@ -32,8 +34,8 @@ const Login = (props:blogsTypes) => {
 
     const handleGoogle = async () =>{
         try{
-        await signInWithPopup(auth, googleProvider).then(()=>{
-            
+        await signInWithPopup(auth, googleProvider).then((userCredential)=>{
+            props.SetUser({name : userCredential.user.displayName === null ? "" : userCredential.user.displayName });
             props.setIsAuth(true);
             navigate("/");
         });

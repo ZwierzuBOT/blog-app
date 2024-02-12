@@ -28,7 +28,7 @@ function App() {
       <div className="App">
         <Header/>
         <Routes>
-          <Route path='/Login' element={<Login isAuth={isLogged} setIsAuth={setIsLogged} />} />
+          <Route path='/Login' element={<Login isAuth={isLogged} setIsAuth={setIsLogged}  User={user} SetUser={setUser}/>} />
           <Route path='/SignUp' element={<SignUp isAuth={isLogged}  setIsAuth={setIsLogged} User={user} SetUser={setUser}/>} />
           <Route path='/' element={<Blogs isAuth={isLogged} setIsAuth={setIsLogged} />} />
           <Route path='/Settings/general' element={<General isAuth={isLogged} setIsAuth={setIsLogged} User={user} SetUser={setUser}/>}/>
