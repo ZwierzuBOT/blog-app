@@ -1,4 +1,4 @@
-.formS{
+.form{
     width: 50%;
     height: 60vh;
     background-color: #efefef;
@@ -12,7 +12,7 @@
     margin: auto;
 }
 
-.formS h1{
+.form h1{
     width: 100%;
     height: 10%;
     display: flex;
@@ -21,7 +21,7 @@
     font-size: 4rem;
 }
 
-.inputsS{
+.inputs{
     width: 100%;
     height: 80%;
     display: flex;
@@ -29,16 +29,16 @@
     justify-content: space-around;
     align-items: flex-start;
 }
-.inputsS input{
+.inputs input{
     width: 100%;
-    height: 20%;
+    height: 13%;
     padding: 1rem;
     border-radius: 1rem;
     font-size: 2rem;
 }
 
-.inputsS label{
-  margin-top: 3%;
+.inputs label{
+    margin-top: 1%;
     width: 100%;
     height: 10%;
     font-size: 2rem;
@@ -47,11 +47,11 @@
     align-items: flex-end;
 }
 
-.inputsS input::placeholder{
+.inputs input::placeholder{
     font-size: 2rem;
 }
 
-.buttonsS{
+.buttons{
     width: 100%;
     height: 20%;
     display: flex;
@@ -62,9 +62,10 @@
 
 
 
-.changeS {
-  width: 20%;
-  height: 70%;
+.change {
+  width: 25%;
+  height: 100%;
+  text-align: center;
   background-color: #FFFFFF;
   border: 0;
   border-radius: .5rem;
@@ -77,21 +78,21 @@
 
 }
 
-.changeS:hover {
+.change:hover {
   background-color: rgb(249,250,251);
 }
 
-.changeS:focus {
+.change:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 
-.changeS:focus-visible {
+.change:focus-visible {
   box-shadow: none;
 }
 
 
-.submitS {
+.submit {
   align-items: center;
   background-color: initial;
   background-image: linear-gradient(#464d55, #25292e);
@@ -104,7 +105,7 @@
   display: inline-flex;
   flex-direction: column;
   font-size: 18px;
-  height: 80%;
+  height: 120%;
   justify-content: center;
   line-height: 1;
   margin: 0;
@@ -112,32 +113,32 @@
   overflow: hidden;
   text-decoration: none;
   transform: translate3d(0, 0, 0);
-  width: 30%;
+  width:30%;
   transition: all .2s ease-in-out;
 }
 
-.submitS:hover {
+.submit:hover {
   box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
   opacity: .85;
 }
 
-.submitS:active {
+.submit:active {
   outline: 0;
 }
 
-.submitS:focus {
+.submit:focus {
   box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
 }
 
 
 
-.googleS{
+.google{
 
   width: 70%;
   max-width: 40rem;
   min-width: 20rem;
   padding: 1rem;
-  height: 20%;
+  height: 15%;
   margin: auto;
   border: 1rem;
   background-color: rgb(255, 255, 255);
@@ -149,8 +150,9 @@
   overflow: hidden;
   background-color: rgb(66, 121, 239);
   color: white;
-  cursor: pointer;
+
 }
+
 
 
 

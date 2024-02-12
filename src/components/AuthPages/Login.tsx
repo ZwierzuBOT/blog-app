@@ -15,8 +15,6 @@ import "../../styles/Login.css"
 type blogsTypes = {
     isAuth: boolean;
     setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-    user: { name: string }; 
-    setUser: React.Dispatch<React.SetStateAction<{ name: string }>>;
 };
 
 
@@ -29,18 +27,16 @@ const Login = (props:blogsTypes) => {
 
     
     const navigate = useNavigate();
-    const [name, setName] = useState<string>("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleGoogle = async () =>{
         try{
-        await signInWithPopup(auth, googleProvider).then((res) => {
-            const name = res.user?.displayName || "";
-            props.setUser({name:name});
+        await signInWithPopup(auth, googleProvider).then(()=>{
+            
+            props.setIsAuth(true);
+            navigate("/");
         });
-        props.setIsAuth(true);
-        navigate("/");
         }catch(err){
             console.error(err);
         }
@@ -51,7 +47,6 @@ const Login = (props:blogsTypes) => {
         try{
         await signInWithEmailAndPassword(auth, email, password).then(()=>{
             props.setIsAuth(true);
-            props.setUser({name:name});
             navigate("/");
         })
         }catch(err){
@@ -60,20 +55,18 @@ const Login = (props:blogsTypes) => {
     }
 
     return ( 
-        <div className="form">
+        <div className="formS">
         <h1>Login</h1>
-        <div className="inputs">
-        <label htmlFor="name">Name:</label>
-         <input type="text" placeholder="..." onChange={(e) => setName(e.target.value)} name="name"/>
+        <div className="inputsS">
         <label htmlFor="email">Email:</label>
             <input type="text" placeholder="..." onChange={(e) => setEmail(e.target.value)}/>
             <label htmlFor="pass">Password:</label>
             <input type="password" placeholder="..." onChange={(e) => setPassword(e.target.value)}/>
-            <button className="google blue" onClick={handleGoogle}><FontAwesomeIcon icon={faGoogle} className="w"/> Continue With Google</button>
+            <button className="googleS blue" onClick={handleGoogle}><FontAwesomeIcon icon={faGoogle} className="w"/> Continue With Google</button>
         </div>
-        <div className="buttons">
-            <button className="change" onClick={()=>navigate("/SignUp")}>Sign Up</button>
-            <button className="submit" onClick={handleLogin}>Login</button>
+        <div className="buttonsS">
+            <button className="changeS" onClick={()=>navigate("/SignUp")}>Sign Up</button>
+            <button className="submitS" onClick={handleLogin}>Login</button>
         </div>
     </div>
      );

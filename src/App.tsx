@@ -18,8 +18,9 @@ import Header from './components/main/header';
 function App() {
 
   const [isLogged, setIsLogged] = useState(false);
-  
-  const [player, setPlayer] = useState<{ name: string }>({ name: "" });
+  const [user, setUser] = useState<{ name: string }>({ name: '' });
+
+
 
   return (
 
@@ -27,10 +28,10 @@ function App() {
       <div className="App">
         <Header/>
         <Routes>
-          <Route path='/Login' element={<Login isAuth={isLogged} setIsAuth={setIsLogged} user={player} setUser={setPlayer}/>} />
-          <Route path='/SignUp' element={<SignUp isAuth={isLogged}  setIsAuth={setIsLogged} user={player} setUser={setPlayer}/>} />
+          <Route path='/Login' element={<Login isAuth={isLogged} setIsAuth={setIsLogged} />} />
+          <Route path='/SignUp' element={<SignUp isAuth={isLogged}  setIsAuth={setIsLogged} User={user} SetUser={setUser}/>} />
           <Route path='/' element={<Blogs isAuth={isLogged} setIsAuth={setIsLogged} />} />
-          <Route path='/Settings/general' element={<General isAuth={isLogged} setIsAuth={setIsLogged} user={player} setUser={setPlayer} />}/>
+          <Route path='/Settings/general' element={<General isAuth={isLogged} setIsAuth={setIsLogged} User={user} SetUser={setUser}/>}/>
         </Routes>
       </div>
     </Router>
