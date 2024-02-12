@@ -28,8 +28,9 @@ const SignUp = (props:blogsTypes) => {
     
     const handleGoogle = async () =>{
         try{
-        await signInWithPopup(auth, googleProvider).then(()=>{
+        await signInWithPopup(auth, googleProvider).then((userCredential)=>{
             props.setIsAuth(true);
+            props.SetUser({name : userCredential.user.displayName === null ? "" : userCredential.user.displayName });
             navigate("/");
         })
         }catch(err){
@@ -45,9 +46,8 @@ const SignUp = (props:blogsTypes) => {
                     updateProfile(userCredential.user, {
                         displayName: name
                     }).then(()=>{
-                        props.SetUser({name : userCredential.user.displayName === null ? "" : userCredential.user.displayName })
+                        props.SetUser({name : userCredential.user.displayName === null ? "" : userCredential.user.displayName });
                     });
-                
             });
             navigate("/Login")
         }catch(err){
