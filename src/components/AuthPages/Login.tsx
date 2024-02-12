@@ -8,6 +8,9 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./../../config/firebase.ts";
 
 
+import "../../styles/Login.css"
+
+
 
 type blogsTypes = {
     isAuth: boolean;

@@ -8,6 +8,8 @@ import { auth, googleProvider } from "../../config/firebase.ts";
 
 import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 
+import "../../styles/SignUp.css";
+
 
 type blogsTypes = {
     isAuth: boolean;
@@ -51,19 +53,19 @@ const SignUp = (props:blogsTypes) => {
 
 
     return ( 
-        <div className="form">
+        <div className="formS">
             <h1>Sign Up</h1>
-            <div className="inputs">
+            <div className="inputsS">
                 <label htmlFor="email">Email:</label>
                 <input type="text" placeholder="..." onChange={(e) => setEmail(e.target.value)} name="email"/>
                 <label htmlFor="pass">Password:</label>
                 <input type="password" placeholder="..." onChange={(e) => setPassword(e.target.value)} name="pass"/>
 
-                <button className="google blue" onClick={handleGoogle}><FontAwesomeIcon icon={faGoogle} className="w"/> Sign Up With Google</button>
+                <button className="googleS" onClick={handleGoogle}><FontAwesomeIcon icon={faGoogle} className="w"/> Sign Up With Google</button>
             </div>
-            <div className="buttons">
-                <button className="submit" onClick={handleSign}>Sign Up</button>
-                <button className="change" onClick={()=>navigate("/Login")}>Login</button>
+            <div className="buttonsS">
+                <button className="submitS" onClick={handleSign}>Sign Up</button>
+                <button className="changeS" onClick={()=>navigate("/Login")}>Login</button>
             </div>
         </div>
      );

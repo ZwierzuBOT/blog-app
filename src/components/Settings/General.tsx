@@ -48,6 +48,7 @@ const General = (props:blogsTypes) => {
             </div>
             <div className="content">
                 <h1 id="nameS">Display Name: {props.user.name}</h1>
+                <h1 id="passwordS"></h1>
                 <button className="logOut" onClick={logOut}>Log Out</button>
             </div>
         </div>
