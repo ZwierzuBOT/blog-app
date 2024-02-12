@@ -26,7 +26,10 @@ const SignUp = (props:blogsTypes) => {
     
     const handleGoogle = async () =>{
         try{
-        await signInWithPopup(auth, googleProvider)
+        await signInWithPopup(auth, googleProvider).then((res)=>{
+            const name = res.user?.displayName || "";
+            props.setUser({name:name});
+        })
         props.setIsAuth(true);
         navigate("/");
         }catch(err){
