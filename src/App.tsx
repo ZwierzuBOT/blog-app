@@ -21,7 +21,7 @@ function App() {
 
   const [isLogged, setIsLogged] = useState(false);
   
-  const [player, setPlayer] = useState();
+  const [player, setPlayer] = useState<{ name: string }>({ name: "" });
 
   return (
 
@@ -30,9 +30,9 @@ function App() {
         <Header/>
         <Routes>
           <Route path='/Login' element={<Login isAuth={isLogged} setIsAuth={setIsLogged} user={player} setUser={setPlayer}/>} />
-          <Route path='/SignUp' element={<SignUp isAuth={isLogged}  setIsAuth={setIsLogged}/>} />
+          <Route path='/SignUp' element={<SignUp isAuth={isLogged}  setIsAuth={setIsLogged} user={player} setUser={setPlayer}/>} />
           <Route path='/' element={<Blogs isAuth={isLogged} setIsAuth={setIsLogged} />} />
-          <Route path='/Settings/general' element={<General isAuth={isLogged} setIsAuth={setIsLogged} />}/>
+          <Route path='/Settings/general' element={<General isAuth={isLogged} setIsAuth={setIsLogged} user={player} setUser={setPlayer} />}/>
         </Routes>
       </div>
     </Router>

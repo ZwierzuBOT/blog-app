@@ -10,12 +10,11 @@ import { useNavigate } from "react-router-dom";
 
 
 type blogsTypes = {
-    isAuth:boolean
-    setIsAuth:React.Dispatch<React.SetStateAction<boolean>>
-    user:object
-    setUser:React.Dispatch<React.SetStateAction<object>>
-}
-
+    isAuth: boolean;
+    setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+    user: { name: string }; 
+    setUser: React.Dispatch<React.SetStateAction<{ name: string }>>;
+};
 
 const General = (props:blogsTypes) => {
     //zrobic by w kazdym podsetting bylo sidebar
@@ -48,7 +47,7 @@ const General = (props:blogsTypes) => {
                 <Sidebar />
             </div>
             <div className="content">
-                <h1 id="nameS">Display Name: </h1>
+                <h1 id="nameS">Display Name: {props.user.name}</h1>
                 <button className="logOut" onClick={logOut}>Log Out</button>
             </div>
         </div>

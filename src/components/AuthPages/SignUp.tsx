@@ -10,11 +10,13 @@ import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 
 
 type blogsTypes = {
-    isAuth:boolean
-    setIsAuth:React.Dispatch<React.SetStateAction<boolean>>
-    user:object
-    setUser:React.Dispatch<React.SetStateAction<object>>
-}
+    isAuth: boolean;
+    setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+    user: { name: string }; 
+    setUser: React.Dispatch<React.SetStateAction<{ name: string }>>;
+};
+
+
 const SignUp = (props:blogsTypes) => {
 
     const [email, setEmail] = useState("");
@@ -27,7 +29,6 @@ const SignUp = (props:blogsTypes) => {
         await signInWithPopup(auth, googleProvider)
         props.setIsAuth(true);
         navigate("/");
-        console.log(props.isAuth);
         }catch(err){
             console.error(err);
         }
@@ -36,8 +37,7 @@ const SignUp = (props:blogsTypes) => {
 
     const handleSign = async () =>{
         try{
-            await createUserWithEmailAndPassword(auth, email, password).then((userCredential) =>{
-                 const user = userCredential.user;
+            await createUserWithEmailAndPassword(auth, email, password).then(() =>{
             });
             navigate("/Login")
         }catch(err){

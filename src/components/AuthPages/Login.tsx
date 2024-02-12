@@ -9,13 +9,14 @@ import { auth, googleProvider } from "./../../config/firebase.ts";
 
 
 
-
 type blogsTypes = {
-    isAuth:boolean
-    setIsAuth:React.Dispatch<React.SetStateAction<boolean>>
-    user:object
-    setUser:React.Dispatch<React.SetStateAction<object>>
-}
+    isAuth: boolean;
+    setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+    user: { name: string }; 
+    setUser: React.Dispatch<React.SetStateAction<{ name: string }>>;
+};
+
+
 
 
 
@@ -25,18 +26,16 @@ const Login = (props:blogsTypes) => {
 
     
     const navigate = useNavigate();
-
+    const [name, setName] = useState<string>("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleGoogle = async () =>{
         try{
-        await signInWithPopup(auth, googleProvider).then((userCredential) => {
-            props.setUser(userCredential.user)
+        await signInWithPopup(auth, googleProvider).then(() => {
         });
         props.setIsAuth(true);
         navigate("/");
-        console.log(props.isAuth);
         }catch(err){
             console.error(err);
         }
@@ -45,10 +44,10 @@ const Login = (props:blogsTypes) => {
 
     const handleLogin = async () =>{
         try{
-        await signInWithEmailAndPassword(auth, email, password).then((userCredential)=>{
+        await signInWithEmailAndPassword(auth, email, password).then(()=>{
             props.setIsAuth(true);
+            props.setUser({name:name});
             navigate("/");
-            console.log(userCredential.user.displayName);
         })
         }catch(err){
             console.error(err);
@@ -59,6 +58,8 @@ const Login = (props:blogsTypes) => {
         <div className="form">
         <h1>Login</h1>
         <div className="inputs">
+        <label htmlFor="name">Name:</label>
+         <input type="text" placeholder="..." onChange={(e) => setName(e.target.value)} name="name"/>
         <label htmlFor="email">Email:</label>
             <input type="text" placeholder="..." onChange={(e) => setEmail(e.target.value)}/>
             <label htmlFor="pass">Password:</label>
