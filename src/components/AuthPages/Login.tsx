@@ -8,15 +8,12 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./../../config/firebase.ts";
 
 
-import "../../styles/Login.css"
 
 
 
 type blogsTypes = {
     isAuth: boolean;
     setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-    User: { name: string };  
-    SetUser: React.Dispatch<React.SetStateAction<{ name: string }>>;
 };
 
 
@@ -34,8 +31,7 @@ const Login = (props:blogsTypes) => {
 
     const handleGoogle = async () =>{
         try{
-        await signInWithPopup(auth, googleProvider).then((userCredential)=>{
-            props.SetUser({name : userCredential.user.displayName === null ? "" : userCredential.user.displayName });
+        await signInWithPopup(auth, googleProvider).then(()=>{
             props.setIsAuth(true);
             navigate("/");
         });
@@ -57,18 +53,18 @@ const Login = (props:blogsTypes) => {
     }
 
     return ( 
-        <div className="formS">
+        <div className="form">
         <h1>Login</h1>
-        <div className="inputsS">
+        <div className="inputs">
         <label htmlFor="email">Email:</label>
             <input type="text" placeholder="..." onChange={(e) => setEmail(e.target.value)}/>
             <label htmlFor="pass">Password:</label>
             <input type="password" placeholder="..." onChange={(e) => setPassword(e.target.value)}/>
-            <button className="googleS blue" onClick={handleGoogle}><FontAwesomeIcon icon={faGoogle} className="w"/> Continue With Google</button>
+            <button className="google blue" onClick={handleGoogle}><FontAwesomeIcon icon={faGoogle} className="w"/> Continue With Google</button>
         </div>
-        <div className="buttonsS">
-            <button className="changeS" onClick={()=>navigate("/SignUp")}>Sign Up</button>
-            <button className="submitS" onClick={handleLogin}>Login</button>
+        <div className="buttons">
+            <button className="change" onClick={()=>navigate("/SignUp")}>Sign Up</button>
+            <button className="submit" onClick={handleLogin}>Login</button>
         </div>
     </div>
      );
