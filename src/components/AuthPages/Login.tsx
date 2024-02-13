@@ -40,7 +40,7 @@ const Login = (props:blogsTypes) => {
             navigate("/");
         });
         }catch(err){
-            console.error(err);
+            console.log("wrong password");
         }
     }
 
@@ -52,7 +52,7 @@ const Login = (props:blogsTypes) => {
             navigate("/");
         })
         }catch(err){
-            console.error(err);
+            console.log("wrong password");
         }
     }
 
