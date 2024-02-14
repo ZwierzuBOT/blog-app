@@ -1,33 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Protest+Riot&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Protest+Riot&display=swap");
 
-
-
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    text-decoration: none;
-    font-family: "Poppins", sans-serif;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
 }
 
-html{
-    font-size: 10px;
+html {
+  font-size: 10px;
 }
 
-body{
-    width: 100%;
-    min-height: 100vh;
-    background-color: black;
-    overflow-x: hidden;
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: black;
+  overflow-x: hidden;
 }
 
-.App{
-    width: 100%;
-    min-height: 100vh;
-    background-color: #efefef;
-    display: flex;
-    flex-direction: column;
+.App {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #efefef;
+  display: flex;
+  flex-direction: column;
 }
