@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {db} from "../../config/firebase";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 import "../../styles/Create.css";
 
@@ -8,6 +10,8 @@ type blogsTypes = {
     setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
     Blogs:object[];
     SetBlogs:React.Dispatch<React.SetStateAction<object[]>>;
+    User:string;
+    SetUser:React.Dispatch<React.SetStateAction<string>>;
   };
 
 
@@ -18,7 +22,6 @@ const CreateBlogs = (props:blogsTypes) => {
     
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
-    const [author, setAuthor] = useState<string>("");
     
 
 
@@ -48,6 +51,11 @@ const CreateBlogs = (props:blogsTypes) => {
 
       const handleSubmit = () =>{
         
+        const BlogObject = new BlogTemplate(title, description, props.User)
+        props.SetBlogs((prevBlogs) => [...prevBlogs, BlogObject]);
+        
+        
+
       }
 
     return ( 
@@ -60,7 +68,7 @@ const CreateBlogs = (props:blogsTypes) => {
             <textarea id="description" name="description" rows={4} cols={50} placeholder="Write your description here..." onChange={(e) => setDescription(e.target.value)}></textarea>
             </div>
             <div className="buttonsBlogs">
-                <button id="submit">Submit</button>
+                <button id="submit" onClick={handleSubmit}>Submit</button>
             </div>
         </div>
      );

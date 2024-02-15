@@ -1,19 +1,20 @@
 
-/*
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+
 
 type blogsTypes = {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  Blogs:object[];
+  SetBlogs:React.Dispatch<React.SetStateAction<object[]>>;
 };
-*/
-const Blogs = () => {
+
+const Blogs = (props:blogsTypes) => {
 
 
-  return <div className="blogs">blogs
-
-  </div>;
-};
+  return (
+  <div className="blogs">
+    blogs
+  </div>
+)};
 
 export default Blogs;

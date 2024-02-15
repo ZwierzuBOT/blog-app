@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-
+import "../../styles/Login.css";
 import { auth, googleProvider } from "./../../config/firebase.ts";
 
 type blogsTypes = {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  User:string;
+  SetUser:React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Login = (props: blogsTypes) => {
@@ -19,8 +21,11 @@ const Login = (props: blogsTypes) => {
 
   const handleGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider).then(() => {
+      await signInWithPopup(auth, googleProvider).then((res) => {
         props.setIsAuth(true);
+        if(res.user.displayName !== null){
+        props.SetUser(res.user.displayName);
+        }
         navigate("/");
       });
     } catch (err) {

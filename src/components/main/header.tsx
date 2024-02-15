@@ -16,7 +16,7 @@ const Header = (props: blogsTypes) => {
   const logOut = async () => {
     await signOut(auth).then(() => {
       props.setIsAuth(false);
-      navigate("/");
+      navigate("/SignUp");
     });
   };
 

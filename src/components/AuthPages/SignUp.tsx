@@ -7,12 +7,19 @@ import { auth, googleProvider } from "../../config/firebase.ts";
 
 import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 
+import "../../styles/SignUp.css";
+//Trzba zrobic name dodac do signup
+
+
 type blogsTypes = {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  User:string;
+  SetUser:React.Dispatch<React.SetStateAction<string>>;
 };
 
 const SignUp = (props: blogsTypes) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,8 +27,11 @@ const SignUp = (props: blogsTypes) => {
 
   const handleGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider).then(() => {
+      await signInWithPopup(auth, googleProvider).then((res) => {
         props.setIsAuth(true);
+        if(res.user.displayName !== null){
+        props.SetUser(res.user.displayName);
+        }
         navigate("/");
       });
     } catch (err) {
@@ -32,6 +42,7 @@ const SignUp = (props: blogsTypes) => {
   const handleSign = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password).then(() => {
+        props.SetUser(name);
         navigate("/Login");
       });
     } catch (err) {
@@ -40,9 +51,16 @@ const SignUp = (props: blogsTypes) => {
   };
 
   return (
-    <div className="form">
+    <div className="formS">
       <h1>Sign Up</h1>
-      <div className="inputs">
+      <div className="inputsS">
+      <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          placeholder="..."
+          onChange={(e) => setName(e.target.value)}
+          name="name"
+        />
         <label htmlFor="email">Email:</label>
         <input
           type="text"
@@ -58,15 +76,15 @@ const SignUp = (props: blogsTypes) => {
           name="pass"
         />
 
-        <button className="google" onClick={handleGoogle}>
+        <button className="googleS" onClick={handleGoogle}>
           <FontAwesomeIcon icon={faGoogle} className="w" /> Sign Up With Google
         </button>
       </div>
-      <div className="buttons">
-        <button className="submit" onClick={handleSign}>
+      <div className="buttonsS">
+        <button className="submitS" onClick={handleSign}>
           Sign Up
         </button>
-        <button className="change" onClick={() => navigate("/Login")}>
+        <button className="changeS" onClick={() => navigate("/Login")}>
           Login
         </button>
       </div>

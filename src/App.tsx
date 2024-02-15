@@ -1,5 +1,5 @@
 import "./styles/App.css";
-import "./styles/Auth.css";
+
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
@@ -13,7 +13,7 @@ import CreateBlogs from "./components/main/create";
 function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [blogs, setBlogs] = useState([{}]);
-
+  const [user, setUser] = useState("");
   return (
     <Router>
       <div className="App">
@@ -21,19 +21,19 @@ function App() {
         <Routes>
           <Route
             path="/Login"
-            element={<Login isAuth={isLogged} setIsAuth={setIsLogged} />}
+            element={<Login isAuth={isLogged} setIsAuth={setIsLogged}  User={user} SetUser={setUser}/>}
           />
           <Route
             path="/SignUp"
-            element={<SignUp isAuth={isLogged} setIsAuth={setIsLogged} />}
+            element={<SignUp isAuth={isLogged} setIsAuth={setIsLogged} User={user} SetUser={setUser}/>}
           />
           <Route
             path="/"
-            element={<Blogs />}
+            element={<Blogs isAuth={isLogged} setIsAuth={setIsLogged}Blogs={blogs} SetBlogs={setBlogs}/>}
           />
           <Route
             path="/create"
-            element={<CreateBlogs isAuth={isLogged} setIsAuth={setIsLogged} Blogs={blogs} SetBlogs={setBlogs}/>}
+            element={<CreateBlogs isAuth={isLogged} setIsAuth={setIsLogged} Blogs={blogs} SetBlogs={setBlogs} User={user} SetUser={setUser}/>}
             />
         </Routes>
       </div>
