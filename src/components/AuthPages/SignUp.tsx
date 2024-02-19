@@ -5,7 +5,7 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 import { auth, googleProvider } from "../../config/firebase.ts";
 
-import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithPopup, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 import "../../styles/SignUp.css";
 //Trzba zrobic name dodac do signup
@@ -41,10 +41,10 @@ const SignUp = (props: blogsTypes) => {
 
   const handleSign = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password).then(() => {
-        props.SetUser(name);
-        navigate("/Login");
-      });
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(userCredential.user, { displayName: name });
+      navigate("/Login");
+
     } catch (err) {
       console.error(err);
     }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../../config/firebase";
+import { db, auth } from "../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 import "../../styles/Create.css";
@@ -36,13 +36,22 @@ const CreateBlogs = (props:blogsTypes) => {
 
       const handleSubmit = async () =>{
 
-        
-        try {
+        try{
+            const currentUser = auth.currentUser;
+          
+            if (currentUser) {
+            const displayName = currentUser.displayName;
+            
+            
             await addDoc(collection(db, "blogs"), {
-                tit: title,
-                des: description,
-                aut: props.User,
+              tit: title,
+              des: description,
+              aut: displayName,
             });
+            
+            setTitle("");
+            setDescription("")
+          }
         } catch (error) {
             console.error(error);
         }
@@ -53,9 +62,9 @@ const CreateBlogs = (props:blogsTypes) => {
             <h1 id="kupa">Create Blogs!</h1>
             <div className="inputsBlogs">
             <label htmlFor="title">Title:</label>
-            <input type="text" placeholder="Write your title here..." name="title" onChange={(e) => setTitle(e.target.value)}/>
+            <input type="text" placeholder="Write your title here..." name="title" onChange={(e) => setTitle(e.target.value)} value={title}/>
             <label htmlFor="title">Description:</label>
-            <textarea id="description" name="description" rows={4} cols={50} placeholder="Write your description here..." onChange={(e) => setDescription(e.target.value)}></textarea>
+            <textarea id="description" name="description" rows={4} cols={50} placeholder="Write your description here..." onChange={(e) => setDescription(e.target.value)} value={description}></textarea>
             </div>
             <div className="buttonsBlogs">
                 <button id="submit" onClick={handleSubmit}>Submit</button>
