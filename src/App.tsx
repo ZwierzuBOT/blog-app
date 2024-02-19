@@ -10,9 +10,17 @@ import SignUp from "./components/AuthPages/SignUp";
 import Header from "./components/main/header";
 import CreateBlogs from "./components/main/create";
 
+
+
+type Blog = {
+  tit: string;
+  des: string;
+  aut: string;
+};
+
 function App() {
   const [isLogged, setIsLogged] = useState(false);
-  const [blogs, setBlogs] = useState([{}]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const [user, setUser] = useState("");
   return (
     <Router>
