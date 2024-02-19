@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {db} from "../../config/firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 import "../../styles/Create.css";
 
 type blogsTypes = {
     isAuth: boolean;
     setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-    Blogs:object[];
-    SetBlogs:React.Dispatch<React.SetStateAction<object[]>>;
     User:string;
     SetUser:React.Dispatch<React.SetStateAction<string>>;
   };
@@ -25,19 +23,6 @@ const CreateBlogs = (props:blogsTypes) => {
     
 
 
-    class BlogTemplate{
-        tit:string;
-        des:string;
-        aut:string;
-
-        constructor(tit:string, des:string, aut:string){
-            this.tit = tit;
-            this.des = des;
-            this.aut = aut; 
-        }
-    }
-
-
     useEffect(() => {
         if (props.isAuth !== true) {
           props.setIsAuth(false);
@@ -49,13 +34,18 @@ const CreateBlogs = (props:blogsTypes) => {
 
 
 
-      const handleSubmit = () =>{
-        
-        const BlogObject = new BlogTemplate(title, description, props.User)
-        props.SetBlogs((prevBlogs) => [...prevBlogs, BlogObject]);
-        
-        
+      const handleSubmit = async () =>{
 
+        
+        try {
+            await addDoc(collection(db, "blogs"), {
+                tit: title,
+                des: description,
+                aut: props.User,
+            });
+        } catch (error) {
+            console.error(error);
+        }
       }
 
     return ( 

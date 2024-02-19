@@ -29,11 +29,11 @@ function App() {
           />
           <Route
             path="/"
-            element={<Blogs isAuth={isLogged} setIsAuth={setIsLogged}Blogs={blogs} SetBlogs={setBlogs}/>}
+            element={<Blogs isAuth={isLogged} setIsAuth={setIsLogged} Blogs={blogs} SetBlogs={setBlogs}/>}
           />
           <Route
             path="/create"
-            element={<CreateBlogs isAuth={isLogged} setIsAuth={setIsLogged} Blogs={blogs} SetBlogs={setBlogs} User={user} SetUser={setUser}/>}
+            element={<CreateBlogs isAuth={isLogged} setIsAuth={setIsLogged} User={user} SetUser={setUser}/>}
             />
         </Routes>
       </div>
