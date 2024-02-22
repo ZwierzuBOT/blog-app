@@ -1,47 +1,54 @@
-import { getDocs, collection } from "firebase/firestore";
-import { db } from "../../config/firebase";
-import { useEffect } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db, auth } from "../../config/firebase";
+import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../styles/Blogs.css";
+import { faEdit, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 type Blog = {
   tit: string;
   des: string;
   aut: string;
+  id: string;
 };
 
-type blogsTypes = {
+type BlogsProps = {
   isAuth: boolean;
-  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-  Blogs: Blog[];
-  SetBlogs: React.Dispatch<React.SetStateAction<Blog[]>>;
+
 };
 
-const Blogs = (props: blogsTypes) => {
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "blogs"));
-        const fetchedBlogs: Blog[] = [];
-        querySnapshot.forEach((doc) => {
-          fetchedBlogs.push(doc.data() as Blog); 
-        });
-        props.SetBlogs(fetchedBlogs);
-      } catch (error) {
-        console.error("Error fetching documents: ", error);
-      }
-    };
+const Blogs = ({ isAuth }: BlogsProps) => {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
 
-    if (props.isAuth) {
-      fetchData();
-    }
-  });
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "blogs"), (snapshot) => {
+      const updatedBlogs: Blog[] = [];
+      snapshot.forEach((doc) => {
+        updatedBlogs.push({ id: doc.id, ...doc.data() } as Blog);
+      });
+      setBlogs(updatedBlogs);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="blogs">
-      {props.Blogs.map((blog, index) => (
-        <div key={index}>
-          <h3>{blog.tit}</h3>
-          <p>{blog.des}</p>
-          <p>{blog.aut}</p>
+      {blogs.map((blog, index) => (
+        <div key={index} className="cont">
+          <p className="author">{blog.aut}</p>
+          <h3 className="title">{blog.tit}</h3>
+          <p className="description">{blog.des}</p>
+          
+
+          {isAuth && auth.currentUser?.uid.toString() === blog.id.toString() ? (
+            <div className="others">
+              <FontAwesomeIcon icon={faEdit} className="edit" />
+              <FontAwesomeIcon icon={faTrashAlt} className="delete" />
+            </div>
+          ):(
+            <div></div>
+          )}
         </div>
       ))}
     </div>

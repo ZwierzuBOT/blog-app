@@ -47,6 +47,7 @@ const CreateBlogs = (props:blogsTypes) => {
               tit: title,
               des: description,
               aut: displayName,
+              id: currentUser.uid.toString(),
             });
             
             setTitle("");

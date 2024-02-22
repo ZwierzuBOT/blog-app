@@ -12,15 +12,9 @@ import CreateBlogs from "./components/main/create";
 
 
 
-type Blog = {
-  tit: string;
-  des: string;
-  aut: string;
-};
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
-  const [blogs, setBlogs] = useState<Blog[]>([]);
   const [user, setUser] = useState("");
   return (
     <Router>
@@ -37,7 +31,7 @@ function App() {
           />
           <Route
             path="/"
-            element={<Blogs isAuth={isLogged} setIsAuth={setIsLogged} Blogs={blogs} SetBlogs={setBlogs}/>}
+            element={<Blogs isAuth={isLogged}/>}
           />
           <Route
             path="/create"
