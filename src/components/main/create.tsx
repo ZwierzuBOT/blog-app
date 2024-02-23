@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db, auth } from "../../config/firebase";
-import { collection, addDoc } from "firebase/firestore";
-
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import "../../styles/Create.css";
 
 type blogsTypes = {
@@ -39,17 +38,23 @@ const CreateBlogs = (props:blogsTypes) => {
         try{
             const currentUser = auth.currentUser;
           
-            if (currentUser) {
+            if (currentUser && description.trim().length >= 1 && title.trim().length >= 1 ){
             const displayName = currentUser.displayName;
             
-            
-            await addDoc(collection(db, "blogs"), {
+            const docRef = await addDoc(collection(db, "blogs"), {
               tit: title,
               des: description,
               aut: displayName,
               id: currentUser.uid.toString(),
+              settingsMode:false,
             });
-            
+
+            const blogId = docRef.id;
+            await updateDoc(doc(db, "blogs", blogId), {
+              BlogId:blogId,
+            });
+
+
             setTitle("");
             setDescription("")
           }
