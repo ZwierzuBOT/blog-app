@@ -69,7 +69,12 @@ const CreateBlogs = (props:blogsTypes) => {
             <div className="inputsBlogs">
             <label htmlFor="title">Title:</label>
             <input type="text" placeholder="Write your title here..." name="title" onChange={(e) => setTitle(e.target.value)} value={title}/>
+            {title.length <= 25 ?(
             <h3 className="licznik">{`${title.length} / 25`}</h3>
+            ):(
+              <h3 className="licznikWrong">{`${title.length} / 25`}</h3>
+            )
+            }
             <label htmlFor="title">Description:</label>
             <textarea id="description" name="description" rows={4} cols={50} placeholder="Write your description here..." onChange={(e) => setDescription(e.target.value)} value={description}></textarea>
             {description.length <= 500 ?(

@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { collection, onSnapshot, doc, deleteDoc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  doc,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db, auth } from "../../config/firebase";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +15,6 @@ import { faGear } from "@fortawesome/free-solid-svg-icons";
 
 //ZROBIC Z LICZNIK CZRWNOY GDY ZA DUZO
 
-
 type Blog = {
   tit: string;
   des: string;
@@ -18,6 +23,8 @@ type Blog = {
   BlogId: string;
   settingsMode: boolean;
   editMode: boolean;
+  clNameTit: string;
+  clNameDes: string;
 };
 
 type BlogsProps = {
@@ -30,7 +37,6 @@ const Blogs = ({ isAuth }: BlogsProps) => {
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [updatedDescription, setUpdatedDescription] = useState("");
 
-  const [n, setN] = useState("licznik")
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "blogs"), (snapshot) => {
       const updatedBlogs: Blog[] = [];
@@ -40,6 +46,8 @@ const Blogs = ({ isAuth }: BlogsProps) => {
           ...doc.data(),
           settingsMode: false,
           editMode: false,
+          clNameTit: "licznik",
+          clNameDes: "licznik",
         } as Blog);
       });
       setBlogs(updatedBlogs);
@@ -72,13 +80,12 @@ const Blogs = ({ isAuth }: BlogsProps) => {
     const blogToUpdate = blogs[index];
     try {
       await updateDoc(doc(db, "blogs", blogToUpdate.BlogId), {
-        tit: updatedTitle || blogToUpdate.tit, 
-        des: updatedDescription || blogToUpdate.des, 
+        tit: updatedTitle || blogToUpdate.tit,
+        des: updatedDescription || blogToUpdate.des,
       });
     } catch (error) {
       console.error("Error while updating blog:", error);
     }
-
 
     const updatedBlogs = [...blogs];
     updatedBlogs[index].editMode = false;
@@ -104,8 +111,17 @@ const Blogs = ({ isAuth }: BlogsProps) => {
               <div></div>
             )}
             {blog.editMode === true ? (
-              <input placeholder={blog.tit} className="editTit" type="text" onChange={(e) => setUpdatedTitle(e.target.value)}/>
-              ):(
+              <input
+                placeholder={blog.tit}
+                className="editTit"
+                type="text"
+                onChange={(e) => {
+                  setUpdatedTitle(e.target.value);
+                  blog.clNameTit === "licznik" ? "licznikWrong" : "licznik";
+                  console.log(blog.clNameTit,blog.clNameDes);
+                }}
+              />-/////////////////////////////////////////////////////////////a/d/////a//////////////////////////////////////////////////////////////////////////////////////////////////////
+            ) : (
               <h3 className="title">{blog.tit}</h3>
             )}
             {blog.settingsMode &&
@@ -130,21 +146,30 @@ const Blogs = ({ isAuth }: BlogsProps) => {
             )}
           </div>
           {blog.editMode ? (
+            <h3 className={blog.clNameTit}>{`${updatedTitle.length} / 25`}</h3>
+          ) : (
+            <div></div>
+          )}
+          {blog.editMode ? (
             <textarea
               placeholder={blog.des}
               className="editDes"
-              onChange={(e) => setUpdatedDescription(e.target.value)}
+              onChange={(e) => {
+                setUpdatedDescription(e.target.value);
+                blog.clNameDes === "licznik" ? "licznikWrong" : "licznik";
+              }}
             />
           ) : (
             <p className="description">{blog.des}</p>
           )}
-          
-          {blog.editMode ?(
-            <h3 className={n}>{`${updatedDescription.length} / 500`}</h3>
-            ):(
-             <div></div>
-            )
-            }
+
+          {blog.editMode ? (
+            <h3
+              className={blog.clNameDes}
+            >{`${updatedDescription.length} / 500`}</h3>
+          ) : (
+            <div></div>
+          )}
           {blog.editMode ? (
             <button className="confirm" onClick={() => editSubmit(index)}>
               Confirm

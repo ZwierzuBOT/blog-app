@@ -23,18 +23,20 @@
     max-width: 80rem;
     padding: 1rem;
     border-radius: 1rem;
-    display: grid;
-    grid-template-rows: 2fr 3fr 6fr 2fr;
+    display: flex;
+    flex-direction: column;
     position: relative;
 }
 
 
 .k{
-    height: 100%;
+    height: 70%;
     width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+    
 }
 .title{
     width: 100%;
@@ -57,27 +59,36 @@ padding: 1rem;
 
 .author{
     width: 50%;
-    height: 100%;
+    height: 20%;
     font-size: 1.5rem;
     color: rgb(222, 92, 114);
 }
 
 .others{
-width: 50%;
+width: 100%;
 height: 100%;
 font-size: 3rem;
 display: flex;
 justify-content: flex-end;
+position: relative;
+align-self: flex-end;
 }
 
 .others *{
-    margin-right: 7%;
-    margin-top: auto;
-    margin-bottom: auto;
+   position: absolute;
+   top: 30%;
 }
 
 .emojis{
     cursor: pointer;
+}
+
+#ed{
+    right: 19%;
+}
+
+#tr{
+    right: 4%;
 }
 
 .gear{
@@ -94,12 +105,19 @@ justify-content: flex-end;
     resize: none;
     border-radius: 1rem;
 }
+.editTit{
+    height: 60%;
+    width: 100%;
+}
+.editDes{
+    height: 70%;
+}
 .editTit::placeholder{
     font-size: 2rem;
 }
 .confirm{
     width: 20%;
-    height: 100%;
+    height: 40%;
     background-color: rgb(196, 196, 196);
     font-size: 2rem;
     resize: none;
@@ -107,16 +125,13 @@ justify-content: flex-end;
     color: black;
     border-radius: 1rem;
     transition: all 0.3s ease;
+    align-self: flex-end;
 }
 
 .confirm:hover{
     transform: scale(105%);
 }
 
-.editTit{
-    width: 100%;
-    height: 90%;
-}
 
 
 .licznikWrong{
