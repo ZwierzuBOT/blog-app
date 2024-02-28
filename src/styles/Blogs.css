@@ -30,12 +30,12 @@
 
 
 .k{
-    height: 70%;
+    height: 40%;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
     
 }
 .title{
@@ -76,11 +76,12 @@ align-self: flex-end;
 
 .others *{
    position: absolute;
-   top: 30%;
+   top: 50%;
 }
 
 .emojis{
     cursor: pointer;
+    transition: all .3 ease-in-out;
 }
 
 #ed{
@@ -106,7 +107,7 @@ align-self: flex-end;
     border-radius: 1rem;
 }
 .editTit, .nothing{
-    height: 60%;
+    height: 100%;
     width: 100%;
 }
 .editDes{

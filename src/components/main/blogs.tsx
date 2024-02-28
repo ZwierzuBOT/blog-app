@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   collection,
   onSnapshot,
@@ -25,6 +25,8 @@ type Blog = {
   editMode: boolean;
   licznikTit: number;
   licznikDes: number;
+  cnTit: string;
+  cnDes: string;
 };
 
 type BlogsProps = {
@@ -48,6 +50,8 @@ const Blogs = ({ isAuth }: BlogsProps) => {
           editMode: false,
           licznikTit: 0,
           licznikDes: 0,
+          cnTit: "licznik",
+          cnDes: "licznik",
         } as Blog);
       });
       setBlogs(updatedBlogs);
@@ -75,25 +79,49 @@ const Blogs = ({ isAuth }: BlogsProps) => {
     updatedBlogs[index].editMode = !updatedBlogs[index].editMode;
     setBlogs(updatedBlogs);
   };
+  
+
+
+
+
 
   const editSubmit = async (index: number) => {
-    const blogToUpdate = blogs[index];
+    const updatedBlogs = [...blogs];
+    const blogToUpdate = updatedBlogs[index];
+  
     try {
-      await updateDoc(doc(db, "blogs", blogToUpdate.BlogId), {
-        tit: updatedTitle || blogToUpdate.tit,
-        des: updatedDescription || blogToUpdate.des,
-      });
+      if (blogToUpdate.licznikTit <= 25 && blogToUpdate.licznikDes <= 500) {
+        await updateDoc(doc(db, "blogs", blogToUpdate.BlogId), {
+          tit: updatedTitle || blogToUpdate.tit,
+          des: updatedDescription || blogToUpdate.des,
+        });
+  
+        updatedBlogs[index].tit = updatedTitle || blogToUpdate.tit;
+        updatedBlogs[index].des = updatedDescription || blogToUpdate.des;
+      } else {
+        updatedBlogs[index].editMode = true; 
+
+        console.log("Title or description exceeds the character limit.");
+      }
     } catch (error) {
       console.error("Error while updating blog:", error);
     }
-
-    const updatedBlogs = [...blogs];
-    updatedBlogs[index].editMode = false;
-    updatedBlogs[index].tit = updatedTitle || blogToUpdate.tit;
-    updatedBlogs[index].des = updatedDescription || blogToUpdate.des;
+  
+    // Do not set editMode to false here
     setBlogs(updatedBlogs);
   };
   
+  
+
+  const licznikFn = (index:number,fanta:string, e:React.ChangeEvent<HTMLInputElement>) =>{
+    if(fanta === "tit"){
+      blogs[index].licznikTit = e.target.value.length;
+      blogs[index].licznikTit > 25 ? blogs[index].cnTit = "licznikWrong" : blogs[index].cnTit = "licznik"
+    }else if(fanta === "des"){
+      blogs[index].licznikDes = e.target.value.length;
+      blogs[index].licznikDes > 25 ? blogs[index].cnDes = "licznikWrong" : blogs[index].cnDes = "licznik"
+    }
+  }
   
   return (
     <div className="blogs">
@@ -117,7 +145,9 @@ const Blogs = ({ isAuth }: BlogsProps) => {
                 className="editTit"
                 type="text"
                 onChange={(e) => {
-                  setUpdatedTitle(e.target.value);}}
+                  setUpdatedTitle(e.target.value);
+                  licznikFn(index,"tit", e);
+                }}
               />
             ) : (
               <h3 className="title">{blog.tit}</h3>
@@ -130,7 +160,14 @@ const Blogs = ({ isAuth }: BlogsProps) => {
                   icon={faEdit}
                   className="emojis"
                   id="ed"
-                  onClick={() => toggleEdit(index)}
+                  onClick={() => {
+                    toggleEdit(index);
+                    blog.licznikTit = 0;
+                    blog.licznikDes = 0
+                    blog.cnTit = "licznik";
+                    blog.cnDes = "licznik";
+                  }
+                  }
                 />
                 <FontAwesomeIcon
                   icon={faTrashAlt}
@@ -144,7 +181,7 @@ const Blogs = ({ isAuth }: BlogsProps) => {
             )}
           </div>
           {blog.editMode ? (
-            <h3>{`${blog.licznikTit} / 25`}</h3>
+            <h3 className={blog.cnTit}>{`${blog.licznikTit} / 25`}</h3>
           ):(
             <div className="nothing"></div>
           )}
@@ -153,13 +190,15 @@ const Blogs = ({ isAuth }: BlogsProps) => {
               placeholder={blog.des}
               className="editDes"
               onChange={(e) => {
-                setUpdatedDescription(e.target.value);}}
+                setUpdatedDescription(e.target.value);
+                blog.licznikDes = e.target.value.length;
+              }}
             />
           ) : (
             <p className="description">{blog.des}</p>
           )}
           {blog.editMode ? (
-            <h3>{`${blog.licznikDes} / 500`}</h3>
+            <h3 className={blog.cnDes}>{`${blog.licznikDes} / 500`}</h3>
           ):(
             <div className="nothing"></div>
           )}
