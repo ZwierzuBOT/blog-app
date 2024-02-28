@@ -23,8 +23,8 @@ type Blog = {
   BlogId: string;
   settingsMode: boolean;
   editMode: boolean;
-  clNameTit: string;
-  clNameDes: string;
+  licznikTit: number;
+  licznikDes: number;
 };
 
 type BlogsProps = {
@@ -46,8 +46,8 @@ const Blogs = ({ isAuth }: BlogsProps) => {
           ...doc.data(),
           settingsMode: false,
           editMode: false,
-          clNameTit: "licznik",
-          clNameDes: "licznik",
+          licznikTit: 0,
+          licznikDes: 0,
         } as Blog);
       });
       setBlogs(updatedBlogs);
@@ -93,7 +93,8 @@ const Blogs = ({ isAuth }: BlogsProps) => {
     updatedBlogs[index].des = updatedDescription || blogToUpdate.des;
     setBlogs(updatedBlogs);
   };
-
+  
+  
   return (
     <div className="blogs">
       {blogs.map((blog, index) => (
@@ -116,11 +117,8 @@ const Blogs = ({ isAuth }: BlogsProps) => {
                 className="editTit"
                 type="text"
                 onChange={(e) => {
-                  setUpdatedTitle(e.target.value);
-                  blog.clNameTit === "licznik" ? "licznikWrong" : "licznik";
-                  console.log(blog.clNameTit,blog.clNameDes);
-                }}
-              />-/////////////////////////////////////////////////////////////a/d/////a//////////////////////////////////////////////////////////////////////////////////////////////////////
+                  setUpdatedTitle(e.target.value);}}
+              />
             ) : (
               <h3 className="title">{blog.tit}</h3>
             )}
@@ -146,29 +144,24 @@ const Blogs = ({ isAuth }: BlogsProps) => {
             )}
           </div>
           {blog.editMode ? (
-            <h3 className={blog.clNameTit}>{`${updatedTitle.length} / 25`}</h3>
-          ) : (
-            <div></div>
+            <h3>{`${blog.licznikTit} / 25`}</h3>
+          ):(
+            <div className="nothing"></div>
           )}
           {blog.editMode ? (
             <textarea
               placeholder={blog.des}
               className="editDes"
               onChange={(e) => {
-                setUpdatedDescription(e.target.value);
-                blog.clNameDes === "licznik" ? "licznikWrong" : "licznik";
-              }}
+                setUpdatedDescription(e.target.value);}}
             />
           ) : (
             <p className="description">{blog.des}</p>
           )}
-
           {blog.editMode ? (
-            <h3
-              className={blog.clNameDes}
-            >{`${updatedDescription.length} / 500`}</h3>
-          ) : (
-            <div></div>
+            <h3>{`${blog.licznikDes} / 500`}</h3>
+          ):(
+            <div className="nothing"></div>
           )}
           {blog.editMode ? (
             <button className="confirm" onClick={() => editSubmit(index)}>

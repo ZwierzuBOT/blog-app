@@ -20,7 +20,7 @@
     margin-bottom: 3rem;
     background-color: #e0e0e0;
     min-height: 30rem;
-    max-width: 80rem;
+    max-width: 65rem;
     padding: 1rem;
     border-radius: 1rem;
     display: flex;
@@ -100,12 +100,12 @@ align-self: flex-end;
 }
 
 .editDes, .editTit{
-    padding: 1rem;
+    padding: .5rem;
     background-color: #d1d1d1;
     resize: none;
     border-radius: 1rem;
 }
-.editTit{
+.editTit, .nothing{
     height: 60%;
     width: 100%;
 }
@@ -113,7 +113,7 @@ align-self: flex-end;
     height: 70%;
 }
 .editTit::placeholder{
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .confirm{
     width: 20%;
