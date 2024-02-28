@@ -79,50 +79,51 @@ const Blogs = ({ isAuth }: BlogsProps) => {
     updatedBlogs[index].editMode = !updatedBlogs[index].editMode;
     setBlogs(updatedBlogs);
   };
-  
-
-
-
-
 
   const editSubmit = async (index: number) => {
     const updatedBlogs = [...blogs];
     const blogToUpdate = updatedBlogs[index];
-  
+
     try {
       if (blogToUpdate.licznikTit <= 25 && blogToUpdate.licznikDes <= 500) {
         await updateDoc(doc(db, "blogs", blogToUpdate.BlogId), {
           tit: updatedTitle || blogToUpdate.tit,
           des: updatedDescription || blogToUpdate.des,
         });
-  
+
         updatedBlogs[index].tit = updatedTitle || blogToUpdate.tit;
         updatedBlogs[index].des = updatedDescription || blogToUpdate.des;
       } else {
-        updatedBlogs[index].editMode = true; 
+        updatedBlogs[index].editMode = true;
 
         console.log("Title or description exceeds the character limit.");
       }
     } catch (error) {
       console.error("Error while updating blog:", error);
     }
-  
+
     // Do not set editMode to false here
     setBlogs(updatedBlogs);
   };
-  
-  
 
-  const licznikFn = (index:number,fanta:string, e:React.ChangeEvent<HTMLInputElement>) =>{
-    if(fanta === "tit"){
+  const licznikFn = (
+    index: number,
+    fanta: string,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (fanta === "tit") {
       blogs[index].licznikTit = e.target.value.length;
-      blogs[index].licznikTit > 25 ? blogs[index].cnTit = "licznikWrong" : blogs[index].cnTit = "licznik"
-    }else if(fanta === "des"){
+      blogs[index].licznikTit > 25
+        ? (blogs[index].cnTit = "licznikWrong")
+        : (blogs[index].cnTit = "licznik");
+    } else if (fanta === "des") {
       blogs[index].licznikDes = e.target.value.length;
-      blogs[index].licznikDes > 25 ? blogs[index].cnDes = "licznikWrong" : blogs[index].cnDes = "licznik"
+      blogs[index].licznikDes > 25
+        ? (blogs[index].cnDes = "licznikWrong")
+        : (blogs[index].cnDes = "licznik");
     }
-  }
-  
+  };
+
   return (
     <div className="blogs">
       {blogs.map((blog, index) => (
@@ -146,7 +147,7 @@ const Blogs = ({ isAuth }: BlogsProps) => {
                 type="text"
                 onChange={(e) => {
                   setUpdatedTitle(e.target.value);
-                  licznikFn(index,"tit", e);
+                  licznikFn(index, "tit", e);
                 }}
               />
             ) : (
@@ -163,11 +164,10 @@ const Blogs = ({ isAuth }: BlogsProps) => {
                   onClick={() => {
                     toggleEdit(index);
                     blog.licznikTit = 0;
-                    blog.licznikDes = 0
+                    blog.licznikDes = 0;
                     blog.cnTit = "licznik";
                     blog.cnDes = "licznik";
-                  }
-                  }
+                  }}
                 />
                 <FontAwesomeIcon
                   icon={faTrashAlt}
@@ -182,7 +182,7 @@ const Blogs = ({ isAuth }: BlogsProps) => {
           </div>
           {blog.editMode ? (
             <h3 className={blog.cnTit}>{`${blog.licznikTit} / 25`}</h3>
-          ):(
+          ) : (
             <div className="nothing"></div>
           )}
           {blog.editMode ? (
@@ -199,7 +199,7 @@ const Blogs = ({ isAuth }: BlogsProps) => {
           )}
           {blog.editMode ? (
             <h3 className={blog.cnDes}>{`${blog.licznikDes} / 500`}</h3>
-          ):(
+          ) : (
             <div className="nothing"></div>
           )}
           {blog.editMode ? (
